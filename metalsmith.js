@@ -52,7 +52,7 @@ const templateConfig = {
 function msBuild() {
   Metalsmith(__dirname)
     .source("./src/content")
-    .destination("./build")
+    .destination("docs  ")
     .clean(true)
     .metadata({
       msVersion: dependencies.metalsmith,
