@@ -52,7 +52,7 @@ const templateConfig = {
 function msBuild() {
   Metalsmith(__dirname)
     .source("./src/content")
-    .destination("docs  ")
+    .destination("docs")
     .clean(true)
     .metadata({
       msVersion: dependencies.metalsmith,
@@ -100,11 +100,10 @@ function msBuild() {
     )
 
     .use(when(isProduction, htmlMinifier()))
-    .build((err) => {
-      if (err) {
-        throw err;
-      }
-    });
+    .build((err, files) => {
+      if (err) throw err
+      console.log('Build success')
+    })
   }
 
   if (require.main === module) {
