@@ -1,0 +1,239 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+  <head>
+    <meta name="verify-v1" content="">
+<meta name="msvalidate.01" content="" />
+<link rel="canonical" href="https://ms-bare-bone-starter.netlify.app/blog/_NixOS quest_"/>
+<meta name="generator" value="metalsmith">
+
+<meta charset="utf-8"/>
+<meta httpEquiv="x-ua-compatible" content="ie=edge"/>
+<meta name="HandheldFriendly" content="True"/>
+<meta name="MobileOptimized" content="320"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta httpEquiv="cleartype" content="on"/>
+<meta httpEquiv="Accept-CH" content="DPR, Viewport-Width, Width"/>
+
+<title>.</title>
+<meta name="description" content="As a pre-christmas personal gift, I have just purchased a ThinkPad x270 laptop from 2000 and installed NixOs on it. I found out it cames with a fingerprint sensor. But I have no clues on how to make it works. This is my adventures discovering NixOS."/>
+<meta name="author" content="Werner Glinka"/>
+<meta name="generator" content="metalsmith"/>
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+<link rel="manifest" href="/assets/icons/site.webmanifest">
+<link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="Metalsmith Starter with Nunjucks templating"/>
+<meta name="twitter:title" content="Metalsmith Bare-bones Starter"/>
+<meta name="twitter:description" content="Metalsmith Starter with Nunjucks templating"/>
+<meta name="twitter:creator" content="werner@glinka.co"/>
+<meta name="twitter:image" content="https://res.cloudinary.com/glinkaco/image/upload/v1646849499/tgc2022/social_yitz6j.png"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Metalsmith Bare-bones Starter"/>
+<meta property="og:description" content="Metalsmith Starter with Nunjucks templating"/>
+<meta property="og:url" content="https://ms-bare-bone-starter.netlify.app/"/>
+<meta property="og:site_name" content="Metalsmith Bare-bones Starter"/>
+<meta property="og:image" content="https://res.cloudinary.com/glinkaco/image/upload/v1646849499/tgc2022/social_yitz6j.png"/>
+<meta property="og:updated_time" content=""}/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet"  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Open+Sans:wght@300&display=swap">
+<link rel="stylesheet" href="/assets/prism-styles.css">
+<link rel="stylesheet" href="/assets/styles.css">
+  </head>
+
+  <body class="blog-post">
+
+    <header>
+  <div class="container">
+    <div class="brand">
+      <a class="home-link" href="/"><img src="/assets/images/metalsmith-logo-bug.png" alt="Metalsmith Starter"/></a>
+    </div>
+
+    <div class="main-menu">
+      <ul>
+        
+          <li>
+            <div>
+              
+                
+              
+              <a href=/ class="home">Go Home</a>
+            </div>
+          </li>
+        
+          <li>
+            <div>
+              
+                
+              
+              <a href=/other-page class="other-page">Other Page</a>
+            </div>
+          </li>
+        
+          <li>
+            <div>
+              
+                
+              
+              <a href=/blog class="blog">Blog</a>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+    
+    <main>
+    
+  <div class="container">
+    <article class="blog-post">
+      <h1>_NixOS quest_ : trying to make my fingerprint sensor works.</h1>
+      <time datetime="2023-02-08T10:45:10Z">February 8, 2023</time>
+
+      <img class="blog-image" src="/assets/images/blog-images/thinkpad_x270.jpg" alt="_NixOS quest_ : trying to make my fingerprint sensor works." />
+
+      <p><img src="/assets/images/blog-images/crossing.jpg#full-width" alt=""></p>
+<h2 id="configure-nixos-on-my-thinkpad-x270-">Configure NixOS on my ThinkPad x270 :</h2>
+<h3 id="step-0---i-installed-nixos-on-my-machine-and-add-some-configuration">Step 0 - I installed NixOs on my machine and add some configuration...</h3>
+<p>More details may come later in an other post. <a href="https://www.cbr.com/moon-knight-steven-grant-lator-gators-marc-spector-theory/">(Laters, gators)</a></p>
+<p>For now, here my config <a href="https://github.com/NicolasHov/nixfiles">https://github.com/NicolasHov/nixfiles</a> with nixos-unstable</p>
+<p>NB : you may just notice that I added the line <code>&lt;nixos-hardware/lenovo/thinkpad/x270&gt;</code> in my configuration.nix file)</p>
+<h3 id="step-1---then-i-looked-for-the-good-fingerprint-sensors-driver-and-i-put-my-finger-on-something-sic">Step 1 - ...then I looked for the good fingerprint sensor&#39;s driver, and I put my finger on something (sic)</h3>
+<p>As there were mostly doc for Ubuntu users and not (yet) Nix users, I slowly realize that it would be the beginning of a long quest to find the right driver for my fingerprint sensor. And that would includes tears and blood (almost)</p>
+<h4 id="i-found-this-linux-packages--fprintd">I found this Linux packages : fprintd</h4>
+<blockquote>
+<p>fprintd is a daemon that provides fingerprint scanning functionality over D-Bus. This is the software developers will want to integrate with to add fingerprint authentication to OSes, desktop environments and applications.</p>
+</blockquote>
+<p><strong>But how to install it with NixOs ?</strong></p>
+<ul>
+<li>found first this thread that added the driver vfs0090 (or the goodix one ) <a href="https://discourse.nixos.org/t/how-to-use-fingerprint-unlocking-how-to-set-up-fprintd-english/21901/2">https://discourse.nixos.org/t/how-to-use-fingerprint-unlocking-how-to-set-up-fprintd-english/21901/2</a></li>
+</ul>
+<pre><code>   # fingerprint reader: login and unlock with fingerprint (if you add one with `fprintd-enroll`)
+  services.fprintd.tod.enable = true;
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090;
+  services.fprintd.enable = true;
+  
+  # I also add those lines which seems to solve some bugs
+  systemd.services.fprintd = {
+     wantedBy = [ &quot;multi-user.target&quot; ];
+     serviceConfig.Type = &quot;simple&quot;; #change the service to start on boot (quicker)
+   };
+ 
+</code></pre>
+<p>It<br>I then checked in gnome settings if it added the fingerprint option in the user password menu but it did not show me any changes yet...(I learned later that I could see it in a more easier way typing the command <code>fprint-enroll</code>)</p>
+<ul>
+<li>I then added the nix package <code>lsusb</code> to my configand use it to show me my hardware informations, especially the sensor one.</li>
+</ul>
+<p>Found out it was the &#39;Validity&#39; sensor:
+<code>Bus 001 Device 004: ID 138a:0097 Validity Sensors, Inc.  </code></p>
+<ul>
+<li>As I was not inspired, I found another post on nixos discourse which seems to be close. It talks about PAM (Privileged Access Management):
+<a href="https://discourse.nixos.org/t/strange-lock-screen-behaviour-with-fprintd-enabled/10248">https://discourse.nixos.org/t/strange-lock-screen-behaviour-with-fprintd-enabled/10248</a>
+and I added those lines:</li>
+</ul>
+<pre><code> security.pam.services.login.fprintAuth = true;
+ security.pam.services.xscreensaver.fprintAuth = true; # similarly for other PAM providers
+</code></pre>
+<p>but my sensor was still not recognize yet, it was too early to care about permissions </p>
+<p><strong>I had to look further and find if a driver existed for this Validity sensor I owned</strong></p>
+<ul>
+<li>I found out there&#39;s a python driver for validity&#39;s sensors on Ubuntu forums. The repo is <a href="https://github.com/uunicorn/python-validity">https://github.com/uunicorn/python-validity</a></li>
+</ul>
+<p><strong>But how to use this driver with NixOs ? It was not in NixOs packages</strong></p>
+<ul>
+<li><p>gladly this question on the forum nixos discourse was exactly my point: there were no package for this driver: <a href="https://discourse.nixos.org/t/thinkpad-t480-fingerprint-reader-support/17448/3">https://discourse.nixos.org/t/thinkpad-t480-fingerprint-reader-support/17448/3</a> but it was not the same sensor. Though it helped me a lot knowing that I was not the only one struggling with my fingerprint sensor :)</p>
+</li>
+<li><p>I even had a look at the official validity forum, but the only person who asked about a nix package for it did not have an answer, and it was around 2012: <a href="https://gitter.im/Validity90/Lobby?at=5caf58edf851ee043d9d85d3">https://gitter.im/Validity90/Lobby?at=5caf58edf851ee043d9d85d3</a></p>
+</li>
+</ul>
+<h3 id="step-3---trying-to-write-a-nixos-package">Step 3 - Trying to write a NixOS package</h3>
+<p><strong>yes</strong></p>
+<p>My friend Yvan Sraka was not far away and kindly tried to write the nixpkgs for python-validity driver. </p>
+<p>Here some of the resources he used:</p>
+<ul>
+<li><a href="https://nixos.org/manual/nixpkgs/stable/#chap-quick-start">https://nixos.org/manual/nixpkgs/stable/#chap-quick-start</a></li>
+<li><a href="https://github.com/on-nix/python">https://github.com/on-nix/python</a> </li>
+<li><a href="https://ryantm.github.io/nixpkgs/languages-frameworks/python/">https://ryantm.github.io/nixpkgs/languages-frameworks/python/</a></li>
+<li>...TODO</li>
+</ul>
+<p>and voila, the default.nix file he added to the python-validity folder:</p>
+<pre><code>{ lib, python3Packages }:
+with python3Packages;
+buildPythonApplication {
+  pname = &quot;python-validity&quot;;
+  version = &quot;0.12&quot;;
+
+  propagatedBuildInputs = [ cryptography pyusb pyyaml ];
+
+  driverPath = /usr/share/python-validity/6_07f_lenovo_mis_qm.xpfwext;
+
+  src = ./.;
+}
+</code></pre>
+<p>We then add this in configuration.nix after the lines we previously talked about
+<code>services.fprintd.tod.driver = pkgs.callPackage ./python-validity { };</code></p>
+<p>Sadly we end up getting this error trying the command <code>fprint-enroll</code>
+<code>Impossible to enroll: GDBus.Error:net.reactivated.Fprint.Error.NoSuchDevice: No devices available</code></p>
+<h3 id="step-4---my-first-answer-on-an-issue-in-github-and-the-first-step-to-success">Step 4 - my first answer on an issue in Github and the first step to success</h3>
+<p>This (cool) guy, Anton, answered my issue here <a href="https://github.com/NixOS/nixos-hardware/issues/521">https://github.com/NixOS/nixos-hardware/issues/521</a> </p>
+<p>He had successsfully creates some Nix packages based on the AUR packages python-validity, open-fprintd and fprintd-clients). The good idea was using open-fprintd rather than fprintd.
+Some parts of his packages are still to be adapted from AUR yet : account management, authentification, password or session management</p>
+<p>At least I can know enroll an user and even verify if he match from the console !! What a day !</p>
+<p>But there&#39;s still some problems to solve as I can&#39;t authentify myself when loading, and it seems to have a trouble when session suspends/resumes.</p>
+<h3 id="step-5---pam-management">Step 5 - PAM management</h3>
+<p>this code need to be adated in nix:</p>
+<pre><code>
+  # Account management.
+   account sufficient pam_unix.so
+  
+  # Authentication management.
+   auth sufficient pam_unix.so   likeauth try_first_pass nullok
+   auth sufficient ${fprintd-clients}/lib/security/pam_fprintd.so
+   auth required pam_deny.so
+  
+  # Password management.
+   password sufficient pam_unix.so nullok sha512
+  
+  # Session management.
+   session required pam_env.so conffile=/etc/pam/environment readenv=0
+   session required pam_unix.so
+</code></pre>
+<h3 id="step-6---bug-when-session-wake-up-from-sleep">Step 6 - Bug when session wake up from sleep</h3>
+<p>The <code>open-fprintd-resume</code> or <code>open-fprintd-suspend</code> services are included in <code>open-fprintd</code> repo but it seems that they don&#39;t work properly with NixOS...</p>
+<h3 id=""></h3>
+
+
+    </article>
+  </div>
+
+    </main>
+
+    <footer>
+  <div class="container">
+    <p>Last site build: Wed, 08 Feb 2023 10:55:43 GMT</p>
+    <p>Metalsmith version: ^2.5.1</p>
+    <p>Node version: v18.12.1</p>
+    <p class="copyright">
+      © 2022 - Build with Metalsmith
+    </p>
+  </div>
+</footer>
+    
+  </body>
+  
+</html>
