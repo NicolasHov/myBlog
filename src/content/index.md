@@ -8,7 +8,7 @@ seo:
   socialImage: "/assets/images/metalsmith-starter-social.png"
   canonicalOverwrite: ""
 ---
-# Metalsmith Blog Starter
+# Fuck off
 
 ![](/assets/images/blog-images/revolt-m2JlMXdqb3s-unsplash.jpg)
 _Photo by <a href="https://unsplash.com/@revolt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">REVOLT</a> on <a href="https://unsplash.com/s/photos/typewritter?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>_
