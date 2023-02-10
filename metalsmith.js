@@ -99,7 +99,7 @@ function msBuild() {
     .use(
       assets({
         source: "src/assets/",
-        destination: "assets/",
+        destination: "myBlog/assets/",
       })
     )
 
