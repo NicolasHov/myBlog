@@ -65,6 +65,10 @@ function msBuild() {
       metadata({
         site: "src/content/data/site.json",
         nav: "src/content/data/navigation.json",
+        sitename: 'MyBlog',
+        description: 'Its about saying »Hello« to the World.',
+        generator: 'Metalsmith',
+        url: 'https://metalsmith.io/'
       })
     )
 
